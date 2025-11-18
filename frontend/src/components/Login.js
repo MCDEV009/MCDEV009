@@ -26,7 +26,17 @@ function Login({ setIsAuthenticated }) {
       setIsAuthenticated(true);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
+      if (err.response) {
+        // Server responded with error
+        setError(err.response.data?.error || 'Login failed');
+      } else if (err.request) {
+        // Request was made but no response received
+        setError('Unable to connect to server. Please check your connection or contact support.');
+      } else {
+        // Something else happened
+        setError(err.message || 'Login failed. Please try again.');
+      }
+      console.error('Login error:', err);
     } finally {
       setLoading(false);
     }

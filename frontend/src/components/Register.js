@@ -38,7 +38,17 @@ function Register({ setIsAuthenticated }) {
       setIsAuthenticated(true);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed');
+      if (err.response) {
+        // Server responded with error
+        setError(err.response.data?.error || 'Registration failed');
+      } else if (err.request) {
+        // Request was made but no response received
+        setError('Unable to connect to server. Please check your connection or contact support.');
+      } else {
+        // Something else happened
+        setError(err.message || 'Registration failed. Please try again.');
+      }
+      console.error('Registration error:', err);
     } finally {
       setLoading(false);
     }

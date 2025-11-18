@@ -1,7 +1,23 @@
 import axios from 'axios';
 import { getToken, removeToken } from './auth';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Determine API URL based on environment
+const getApiUrl = () => {
+  // If explicitly set via environment variable, use it
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+  
+  // In production (on Vercel), use relative URL to same domain
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return '/api';
+  }
+  
+  // Development fallback
+  return 'http://localhost:5000/api';
+};
+
+const API_URL = getApiUrl();
 
 const api = axios.create({
   baseURL: API_URL,

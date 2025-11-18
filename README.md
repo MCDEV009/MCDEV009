@@ -100,10 +100,43 @@ Edit `backend/.env` to configure:
 Edit `frontend/.env` to configure:
 - `REACT_APP_API_URL` - Backend API URL (default: http://localhost:5000/api)
 
+## Deployment
+
+### Vercel Deployment
+
+The project is configured for deployment on Vercel with serverless functions:
+
+1. **Install dependencies at root level:**
+   ```bash
+   npm install
+   ```
+
+2. **Set Environment Variables in Vercel:**
+   - `JWT_SECRET` - A strong, random string for JWT token signing
+   - `DATABASE_PATH` - (Optional) Path for SQLite database (defaults to `/tmp/database.sqlite`)
+
+3. **Deploy to Vercel:**
+   ```bash
+   vercel
+   ```
+
+### Important Notes for Production
+
+⚠️ **SQLite Limitations with Serverless Functions:**
+- SQLite uses file-based storage which has limitations in serverless environments
+- The `/tmp` directory is used for the database, but data may not persist between deployments
+- **For production, consider migrating to:**
+  - Vercel Postgres
+  - Supabase
+  - PlanetScale
+  - Other cloud database services
+
+The current setup will work for development and testing, but for production workloads, a proper cloud database is recommended.
+
 ## Security Notes
 
 ⚠️ **Important for Production:**
-- Change the `JWT_SECRET` in `backend/.env` to a strong, random string
+- Change the `JWT_SECRET` in environment variables to a strong, random string
 - Use environment variables for all sensitive data
 - Consider using a more robust database (PostgreSQL, MySQL) for production
 - Implement rate limiting

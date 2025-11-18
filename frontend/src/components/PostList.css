@@ -1,0 +1,75 @@
+.post-list {
+  display: grid;
+  gap: 20px;
+}
+
+.post-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.post-header h3 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.post-meta {
+  color: #666;
+  font-size: 14px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.edit-button:hover {
+  background: #f0f0f0;
+}
+
+.delete-button:hover {
+  background: #fee;
+}
+
+.post-content {
+  color: #555;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.empty-state {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
